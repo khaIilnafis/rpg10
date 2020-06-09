@@ -7,14 +7,33 @@
 <meta name="Description" content="Enter your description here"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="stylesheets/style.css">
 <title>RPG10</title>
 </head>
 <body>
-<div class="container">
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">RPG10</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" disabled>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" disabled>Search</button>
+          </form>
+        </div>
+      </nav> 
+</header>
+<main role="main" class="container">
     <div class="row">
         <div id="header" class="col-sm-12 text-center">
-            <h1>RPG10</h1>
-            <h2>Updates every 10 minutes..</h2>
+            <h3>Updates every 10 minutes..</h3>
         </div>
     </div>
     <div class="row">
@@ -41,8 +60,16 @@
             </div>
         </div>
     </div>
-</div>
-
+</main>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pt-3">
+                <h5 class="">Built by Khalil Brown, <a href="https://github.com/inafis">Github: inafis</a></h5>
+            </div>
+        </div>
+    </div>
+</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
