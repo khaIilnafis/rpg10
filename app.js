@@ -78,7 +78,7 @@ task.start();
 function grabStats(theboy){
     API.MWBattleData(theboy).then((output) => {
       console.log(output);
-      db.Player.findOne({where: name === theboy})
+      db.Player.findOne({where: {name: theboy}})
       .then(function(player){
         if(player)
           return player.update({name: theboy, data: JSON.stringify(output)})
