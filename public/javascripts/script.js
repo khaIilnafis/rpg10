@@ -2,7 +2,6 @@ $(document).ready(function(){
     $.get('/all-players')
     .then(function(players){
         let lastUpdated = moment(players[0].updatedAt).format('MMMM Do YYYY, hh:mm:ss a');
-        $("#header").append(`<span> Last Updated: ${lastUpdated}`);
         players.forEach(player => {
             let row = $("<tr>");
             let playerData = JSON.parse(player.data);
