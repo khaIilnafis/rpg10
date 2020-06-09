@@ -6,7 +6,8 @@ $(document).ready(function(){
             let row = $("<tr>");
             let playerData = JSON.parse(player.data);
             let rowData = $(`<td>${player.id}</td><td>${player.name}</td><td>Wins: ${playerData.br.wins}</td>
-            <td>${playerData.br.kills}</td><td>${playerData.br.kdRatio}</td> <td>${playerData.br.downs}</td> <td>${playerData.br.gamesPlayed}</td>`);
+            <td>${playerData.br.kills}</td><td>${playerData.br.kdRatio}</td> <td>${playerData.br.downs}</td> <td>${playerData.br.gamesPlayed}</td>
+            <td>${playerData.br.topTen}</td><td>${playerData.br.topFive}</td>`);
             row.append(rowData);
             $('tbody').append(row);
         })
@@ -14,4 +15,4 @@ $(document).ready(function(){
     .catch(function(error){
         console.log(error)
     })
-})
+// })

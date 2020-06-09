@@ -30,6 +30,8 @@
                             <th scope="col"> KD Ratio</th>
                             <th scope="col"> Downs</th>
                             <th scope="col"> Games Played</th>
+                            <th scope="col"> Top 10</th>
+                            <th scope="col"> Top 5</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,25 +46,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<!-- <script src="javascripts/script.js"></script> -->
-<script>
-    $(document).ready(function(){
-    $.get('/all-players')
-    .then(function(players){
-        console.log(players)
-        players.forEach(player => {
-            let row = $("<tr>");
-            let playerData = JSON.parse(player.data);
-            let rowData = $(`<td>${player.id}</td><td>${player.name}</td><td>Wins: ${playerData.br.wins}</td>
-            <td>${playerData.br.kills}</td><td>${playerData.br.kdRatio}</td> <td>${playerData.br.downs}</td> <td>${playerData.br.gamesPlayed}</td>`);
-            row.append(rowData);
-            $('tbody').append(row);
-        })
-    })
-    .catch(function(error){
-        console.log(error)
-    })
-})
-</script>
+<script src="javascripts/script.js"></script>
 </body>
 </html>
