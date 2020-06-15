@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from '../utilities/auth-service'
 
 function Dashboard () {
     return(

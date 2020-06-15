@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Col, Form, FormGroup, Button, FormText, Label, Input } from 'reactstrap';
 import Auth from '../../utilities/auth-service';
-function RegistrationForm(props) {
+function LoginForm(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ function RegistrationForm(props) {
     return (
         <Form onSubmit={handleSubmit}>
             <FormGroup row>
-                <Label for="email">Email</Label>
+                <Label for="email">Activision Email</Label>
                 <Input type="email" name="email" id="email" placeholder="example@live.com" value={email} onChange={e => setEmail(e.target.value)}></Input>
             </FormGroup>
             <FormGroup row>
@@ -32,4 +32,4 @@ function RegistrationForm(props) {
     )
 }
 
-export default RegistrationForm;
+export default LoginForm;

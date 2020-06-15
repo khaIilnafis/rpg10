@@ -5,20 +5,26 @@ import App from './App';
 import { About, Dashboard, Login, Register } from './pages'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import PrivateRoute from './routes/PrivateRoute';
 import * as serviceWorker from './serviceWorker';
 import Navbar from './components/Navbar';
+import {Container} from 'reactstrap';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Navbar></Navbar>
+      <Container>
       <Switch>
         <Route exact path="/" component={App}></Route>
         <Route exact path="/about" component={About}></Route>
-        <Route exact path="/dashboard" component={Dashboard}></Route>
+        <PrivateRoute exact path="/dashboard">
+          <Dashboard></Dashboard>
+        </PrivateRoute>
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/register" component={Register}></Route>
       </Switch>
+      </Container>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

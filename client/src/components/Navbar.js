@@ -28,7 +28,7 @@ const MyNav = (props) => {
             <NavItem>
               <NavLink href="/dashboard">Dashboard</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
+            {/* <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Options
               </DropdownToggle>
@@ -44,15 +44,15 @@ const MyNav = (props) => {
                   Reset
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> */}
           </Nav>
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink href="/login">Login</NavLink>
             </NavItem>
-            <NavItem>
+            {/* <NavItem>
               <NavLink href="/register">Register</NavLink>
-            </NavItem>
+            </NavItem> */}
           </Nav>
         </Collapse>
       </Navbar>
