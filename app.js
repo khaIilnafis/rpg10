@@ -9,11 +9,9 @@ const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const db = require('./models');
-
-const API = require('call-of-duty-api')({platform: "xbl"});
-
 
 const app = express();
 
@@ -34,7 +32,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/auth/', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

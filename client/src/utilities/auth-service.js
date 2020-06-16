@@ -1,19 +1,37 @@
 import axios from 'axios';
 
 export default {
-    login: function(user){
-        // this.isAuthenticated = true;
-        return axios.post('/api/auth/login', user);
+    logIn: function(user){
+        return new Promise(function(resolve, reject){
+            axios.post('/api/auth/login', user)
+            .then(res => {
+                localStorage.setItem("user", JSON.stringify(res.data.user))
+                localStorage.setItem("isAuth", true);
+                return resolve(res.data);
+            })
+            .catch(err => {
+                return reject(err);
+            })
+        })
     },
     register: function(){
         return true
     },
-    isAuthenticated: false,
+    isAuthenticated: function(){
+        return localStorage.getItem("isAuth");
+    },
     getUser: function(){
-        return JSON.parse(localStorage.getItem("user"));
+        return new Promise(function(resolve, reject){
+            let user = JSON.parse(localStorage.getItem("user"));
+            if(user){
+                return resolve(user)
+            }else{
+                return reject(null);
+            }
+        })
     },
     logOut: function(){
-        // localStorage.removeItem("user");
-        this.isAuthenticated = false;
+        localStorage.removeItem("user");
+        localStorage.setItem("isAuth",false);
     }
 }

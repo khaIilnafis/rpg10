@@ -6,18 +6,19 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import { fetchUser} from '../actions/userActions'
+
 
 const MyNav = (props) => {
+  props.dispatch(fetchUser());
+
   const [isOpen, setIsOpen] = useState(false);
+  // const [user, setUser] = useState(0);
 
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -48,7 +49,12 @@ const MyNav = (props) => {
           </Nav>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/login">Login</NavLink>
+
+              <NavLink href="/login">
+
+                {props.email ? `Welcome ${props.email}` : `Login`}
+
+              </NavLink>
             </NavItem>
             {/* <NavItem>
               <NavLink href="/register">Register</NavLink>
@@ -60,4 +66,9 @@ const MyNav = (props) => {
   );
 }
 
-export default MyNav;
+const mapStateToProps = state => {
+  const { user } = state.userState || {};
+  return user;
+}
+
+export default connect(mapStateToProps)(MyNav);
