@@ -40,7 +40,25 @@ const MyNav = (props) => {
               <NavLink href="/dashboard">Dashboard</NavLink>
             </NavItem>
           </Nav>
+          {props.email ? 
           <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/profile/me">Welcome {props.email}</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={logOut} href="#">Logout</NavLink>
+            </NavItem>
+          </Nav>
+          :
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+            <NavLink href="/login">Login</NavLink>
+            </NavItem>
+            <NavItem>
+            <NavLink href="/register">Register</NavLink>
+            </NavItem>
+          </Nav>}
+          {/* <Nav className="ml-auto" navbar>
             <NavItem>
             {props.email ? <NavLink href="/profile/me">Welcome {props.email}</NavLink> : <NavLink href="/login">Login</NavLink>}
             </NavItem>
@@ -49,7 +67,7 @@ const MyNav = (props) => {
               <NavLink href="#">Logout</NavLink>
             </NavItem> : null
             }
-          </Nav>
+          </Nav> */}
         </Collapse>
       </Navbar>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Button, Label, Input, Alert } from 'reactstrap';
 import { loginUser } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
@@ -10,10 +10,12 @@ function LoginForm(props) {
     const [password, setPassword] = useState("");
     // const [user] = useState();
     const history = useHistory();
-
+    const [err, setError] = useState("");
     useEffect(()=>{
         if(props.isLoggedIn){
             history.push("/dashboard");
+        }else if(props.auth){
+            setError(props.auth.message)
         }
     },[props]);
 
@@ -23,16 +25,17 @@ function LoginForm(props) {
             email: email,
             password: password
         }
-        props.dispatch(loginUser(user));
+        props.dispatch(loginUser(user))
     }
     return (
         <Form onSubmit={handleSubmit}>
+            {err ? <Alert color="danger">{err}</Alert> : ""}
             <FormGroup row>
-                <Label for="email">Activision Email</Label>
+                <Label for="email">Email</Label>
                 <Input type="email" name="email" id="email" placeholder="example@live.com" value={email} onChange={e => setEmail(e.target.value)}></Input>
             </FormGroup>
             <FormGroup row>
-                <Label for="password">Activision Password</Label>
+                <Label for="password">Password</Label>
                 <Input type="password" name="password" id="password" placeholder="xfE2s@!" value={password} onChange={e => setPassword(e.target.value)}></Input>
             </FormGroup>
             <Button type="submit">Submit</Button>

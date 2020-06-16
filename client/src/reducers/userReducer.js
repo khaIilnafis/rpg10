@@ -35,6 +35,42 @@ export default function reducer(state={
               user: action.payload.user
           }
       }
+      case "REGISTER_USER_PENDING":{
+        return {
+            ...state,
+            isLoggedIn: false,
+            fetching: true,
+            fetched: true,
+            user: action.payload
+        }
+      }
+      case "REGISTER_USER_FULFILLED":{
+        return {
+            ...state,
+            isLoggedIn: true,
+            fetching: false,
+            fetched: false,
+            user: action.payload
+        }
+      } 
+      case "REGISTER_USER_REJECTED":{
+        return {
+            ...state,
+            isLoggedIn: false,
+            fetching: false,
+            fetched: false,
+            auth: action.payload.response.data
+        }
+      }
+      case "LOGIN_USER_START_REJECTED":{
+        return {
+            ...state,
+            isLoggedIn: false,
+            fetching: false,
+            fetched: false,
+            auth: action.payload.response.data
+        }
+    }
       case "LOGOUT_USER":{
         return {
           ...state,

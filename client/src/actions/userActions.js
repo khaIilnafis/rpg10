@@ -2,7 +2,18 @@ import AUTH from '../utilities/auth-service';
 
 export function loginUser(user){
     return function(dispatch){
-        dispatch({type: "LOGIN_USER_START", payload: AUTH.logIn(user)});
+        dispatch({type: "LOGIN_USER_START", payload: AUTH.logIn(user)})
+        .catch(error => {
+            console.log(error);
+        });
+    }
+}
+export function registerUser(user){
+    return function(dispatch){
+        dispatch({type: "REGISTER_USER", payload: AUTH.register(user)})
+        .catch(error => {
+            console.log(error);
+        });
     }
 }
 export function logOutUser(){

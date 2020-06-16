@@ -14,8 +14,18 @@ export default {
             })
         })
     },
-    register: function(){
-        return true
+    register: function(user){
+        return new Promise(function(resolve, reject){
+            axios.post('/api/auth/register', user)
+            .then(res => {
+                localStorage.setItem("user", JSON.stringify(res.data))
+                localStorage.setItem("isAuth", true);
+                return resolve(res.data);
+            })
+            .catch(err => {
+                return reject(err);
+            })
+        })
     },
     isAuthenticated: function(){
         return localStorage.getItem("isAuth");
