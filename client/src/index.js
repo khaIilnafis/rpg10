@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import { About, Dashboard, Login, Register, Home } from './pages'
+import { About, Dashboard, Login, Register, Home, Profile } from './pages'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './routes/PrivateRoute';
@@ -29,6 +29,7 @@ ReactDOM.render(
             </PrivateRoute>
             {/* <Route exact path="/login" component={Login}></Route> */}
             <Route exact path="/register" component={Register}></Route>
+            <Route path="/profile/:user" component={Profile}></Route>
           </Switch>
         </Container>
       </Router>

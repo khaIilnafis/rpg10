@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
-import { userContext } from '../../context/user-context';
 import { loginUser } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
@@ -9,8 +8,14 @@ import { useHistory } from "react-router-dom";
 function LoginForm(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user] = useState();
+    // const [user] = useState();
     const history = useHistory();
+
+    useEffect(()=>{
+        if(props.isLoggedIn){
+            history.push("/dashboard");
+        }
+    },[props]);
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -19,11 +24,9 @@ function LoginForm(props) {
             password: password
         }
         props.dispatch(loginUser(user));
-        // history.push("/dashboard");
     }
     return (
         <Form onSubmit={handleSubmit}>
-            <userContext.Provider value={user}></userContext.Provider>
             <FormGroup row>
                 <Label for="email">Activision Email</Label>
                 <Input type="email" name="email" id="email" placeholder="example@live.com" value={email} onChange={e => setEmail(e.target.value)}></Input>
@@ -36,5 +39,9 @@ function LoginForm(props) {
         </Form>
     )
 }
-  
-export default connect(null)(LoginForm);
+const mapStateToProps = state => {
+    const user = state.userState || {};
+    return user;
+  }
+    
+export default connect(mapStateToProps)(LoginForm);

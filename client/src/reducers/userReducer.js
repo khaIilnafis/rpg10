@@ -1,5 +1,8 @@
 export default function reducer(state={
-    user: {},
+    user: {
+      isLoggedIn: false,
+      logoutPending: false,
+    },
     fetching: false,
     fetched: false,
     error: null,
@@ -26,10 +29,34 @@ export default function reducer(state={
       case "LOGIN_USER_START_FULFILLED":{
           return {
               ...state,
+              isLoggedIn: true,
               fetching: false,
               fetched: true,
               user: action.payload.user
           }
+      }
+      case "LOGOUT_USER":{
+        return {
+          ...state,
+          logoutPending: true,
+          user: action.payload
+        }
+      }
+      case "LOGOUT_USER_PENDING":{
+        return {
+          ...state,
+          logoutPending: true,
+          isLoggedIn: false,
+          user: action.payload
+        }
+      }
+      case "LOGOUT_USER_FULFILLED":{
+        return {
+          ...state,
+          logoutPending: false,
+          isLoggedIn: false,
+          user: action.payload
+        }
       }
       default:
         return state

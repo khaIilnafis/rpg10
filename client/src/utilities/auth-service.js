@@ -24,14 +24,29 @@ export default {
         return new Promise(function(resolve, reject){
             let user = JSON.parse(localStorage.getItem("user"));
             if(user){
+                user.logoutPending = false;
                 return resolve(user)
             }else{
-                return resolve("No user");
+                resolve('no user');
+                // return function(dispatch){
+                //     dispatch({type: "LOGOUT_USER_FULFILLED", payload: {user:{logoutPending: false}}});
+                // }
             }
         })
     },
     logOut: function(){
-        localStorage.removeItem("user");
-        localStorage.removeItem("isAuth");
+        return new Promise(function(resolve, reject){
+            localStorage.removeItem("user");
+            localStorage.removeItem("isAuth");
+            let data = {
+                logoutPending: true
+            }
+            resolve({user:data})
+            return function(dispatch){
+                dispatch({type: "LOGOUT_USER_FULFILLED", payload: {user:data}});
+            }
+        })
+        
+        
     }
 }

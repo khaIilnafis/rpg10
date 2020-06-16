@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Collapse,
   Navbar,
@@ -10,13 +10,20 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchUser, logOutUser} from '../actions/userActions'
+import {useHistory} from 'react-router-dom';
 
 
 const MyNav = (props) => {
   props.dispatch(fetchUser());
-
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   // const [user, setUser] = useState(0);
+  
+  useEffect(()=>{
+    if((props.user) && (props.user.logoutPending)){
+      history.push('/');
+    }
+  },[props.user])
 
   const toggle = () => setIsOpen(!isOpen);
   const logOut = () => {
@@ -32,36 +39,16 @@ const MyNav = (props) => {
             <NavItem>
               <NavLink href="/dashboard">Dashboard</NavLink>
             </NavItem>
-            {/* <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> */}
           </Nav>
           <Nav className="ml-auto" navbar>
             <NavItem>
-            {props.email ? <NavLink>Welcome {props.email}</NavLink> : <NavLink href="/login">Login</NavLink>}
+            {props.email ? <NavLink href="/profile/me">Welcome {props.email}</NavLink> : <NavLink href="/login">Login</NavLink>}
             </NavItem>
             {props.email ? 
             <NavItem onClick={logOut}>
               <NavLink href="#">Logout</NavLink>
             </NavItem> : null
             }
-            {/* <NavItem>
-              <NavLink href="/register">Register</NavLink>
-            </NavItem> */}
           </Nav>
         </Collapse>
       </Navbar>
