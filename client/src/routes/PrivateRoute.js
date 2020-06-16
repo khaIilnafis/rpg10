@@ -4,7 +4,21 @@ import Auth from '../utilities/auth-service';
 
 function PrivateRoute({children, ...rest}){
     return(
-        <Route {...rest} render={({location}) => Auth.isAuthenticated() ? children : <Redirect to={{pathname:"/login", state:{from:location}}}/>}/>
+        <Route {...rest} render={({location}) => {
+            if(Auth.isAuthenticated() && location.pathname !== '/login'){
+                return children
+            }else if((Auth.isAuthenticated() && location.pathname === '/login') || (Auth.isAuthenticated() && location.pathname === '/register')){
+                return <Redirect to={{pathname:"/dashboard", state:{from:location}}}></Redirect>
+            }else if(!Auth.isAuthenticated() && location.pathname !== '/login'){
+                return <Redirect to={{pathname: "/login", state:{from:location}}}/>
+            }else{
+                return children
+            }
+            // return Auth.isAuthenticated() && location.pathname !== '/login' ? children : 
+            // Auth.isAuthenticated() && location.pathname == '/login' ? 
+            // <Redirect to={{pathname:"/dashboard", state:{from:location}}}/> : 
+            // children
+        }}/>
     )
 }
 export default PrivateRoute;

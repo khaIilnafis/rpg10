@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Form, FormGroup, Button, Label, Input } from 'reactstrap';
-import Auth from '../../utilities/auth-service';
 import { userContext } from '../../context/user-context';
 import { loginUser } from '../../actions/userActions';
 import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 
 function LoginForm(props) {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState();
+    const [user] = useState();
+    const history = useHistory();
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -19,11 +19,7 @@ function LoginForm(props) {
             password: password
         }
         props.dispatch(loginUser(user));
-        // Auth.logIn(user)
-        //     .then(data => {
-        //         setUser(data);
-        //     })
-        //     .catch(err => console.log(err));
+        // history.push("/dashboard");
     }
     return (
         <Form onSubmit={handleSubmit}>
@@ -40,9 +36,5 @@ function LoginForm(props) {
         </Form>
     )
 }
-const mapStateToProps = state => {
-    const { user } = state.user || {};
-    return user;
-  }
   
 export default connect(null)(LoginForm);

@@ -9,7 +9,7 @@ import {
   NavLink
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { fetchUser} from '../actions/userActions'
+import { fetchUser, logOutUser} from '../actions/userActions'
 
 
 const MyNav = (props) => {
@@ -19,6 +19,9 @@ const MyNav = (props) => {
   // const [user, setUser] = useState(0);
 
   const toggle = () => setIsOpen(!isOpen);
+  const logOut = () => {
+    props.dispatch(logOutUser());
+  }
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -49,13 +52,13 @@ const MyNav = (props) => {
           </Nav>
           <Nav className="ml-auto" navbar>
             <NavItem>
-
-              <NavLink href="/login">
-
-                {props.email ? `Welcome ${props.email}` : `Login`}
-
-              </NavLink>
+            {props.email ? <NavLink>Welcome {props.email}</NavLink> : <NavLink href="/login">Login</NavLink>}
             </NavItem>
+            {props.email ? 
+            <NavItem onClick={logOut}>
+              <NavLink href="#">Logout</NavLink>
+            </NavItem> : null
+            }
             {/* <NavItem>
               <NavLink href="/register">Register</NavLink>
             </NavItem> */}

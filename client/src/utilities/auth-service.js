@@ -26,12 +26,12 @@ export default {
             if(user){
                 return resolve(user)
             }else{
-                return reject(null);
+                return resolve("No user");
             }
         })
     },
     logOut: function(){
         localStorage.removeItem("user");
-        localStorage.setItem("isAuth",false);
+        localStorage.removeItem("isAuth");
     }
 }

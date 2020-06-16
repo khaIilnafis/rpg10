@@ -24,7 +24,10 @@ ReactDOM.render(
             <PrivateRoute exact path="/dashboard">
               <Dashboard></Dashboard>
             </PrivateRoute>
-            <Route exact path="/login" component={Login}></Route>
+            <PrivateRoute exact path="/login">
+              <Login></Login>
+            </PrivateRoute>
+            {/* <Route exact path="/login" component={Login}></Route> */}
             <Route exact path="/register" component={Register}></Route>
           </Switch>
         </Container>

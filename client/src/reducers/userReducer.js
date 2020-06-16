@@ -1,8 +1,5 @@
-import AUTH from '../utilities/auth-service';
 export default function reducer(state={
-    user: {
-      
-    },
+    user: {},
     fetching: false,
     fetched: false,
     error: null,
@@ -34,12 +31,7 @@ export default function reducer(state={
               user: action.payload.user
           }
       }
-      case "SET_USER_NAME": {
-        return {
-          ...state,
-          user: {...state.user, name: action.payload},
-        }
-      }
+      default:
+        return state
     }
-    return state
 }
