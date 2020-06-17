@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import { About, Dashboard, Login, Register, Home, Profile } from './pages'
+import Footer from './components/Footer/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './routes/PrivateRoute';
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Route path="/profile/:user" component={Profile}></Route>
           </Switch>
         </Container>
+        <Footer></Footer>
       </Router>
     </Provider>
   </React.StrictMode>,
