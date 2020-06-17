@@ -6,7 +6,7 @@ import "./footer.css";
 const Footer = () => (
   <footer className="footer">
           <Row>
-              <Col lg={{offset:1}}>
+              <Col sm={{offset:3}} md={{offset:4}} lg={{offset:4}} xs={{offset:2}}>
                 <h6>Copyright © 2020, Khalil Brown, All Rights Reserved.</h6>
               </Col>
           </Row>
