@@ -15,7 +15,7 @@ function Home () {
     },[])
     
     return(
-        <Container>
+        <Container style={{"margin-top":"20px"}}>
             <Row>
                 <Col>
                 <h3>WarZone</h3>
