@@ -14,8 +14,8 @@ function LoginForm(props) {
     useEffect(()=>{
         if(props.isLoggedIn){
             history.push("/dashboard");
-        }else if(props.auth){
-            setError(props.auth.message)
+        }else{
+            setError(props.message)
         }
     },[props]);
 

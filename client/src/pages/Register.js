@@ -4,7 +4,7 @@ import { registerUser } from '../actions/userActions';
 import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-function RegistrationForm(props) {
+function Register(props) {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
@@ -17,8 +17,8 @@ function RegistrationForm(props) {
     useEffect(()=>{
         if(props.isLoggedIn){
             history.push("/dashboard");
-        }else if(props.auth){
-            setError(props.auth.message)
+        }else{
+            setError(props.message)
         }
     },[props]);
 
@@ -61,4 +61,4 @@ const mapStateToProps = state => {
     return user;
   }
     
-export default connect(mapStateToProps)(RegistrationForm);
+export default connect(mapStateToProps)(Register);

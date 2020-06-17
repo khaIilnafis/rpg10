@@ -9,21 +9,23 @@ import {
   NavLink
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { fetchUser, logOutUser} from '../actions/userActions'
-import {useHistory} from 'react-router-dom';
+import { fetchUser, logOutUser } from '../actions/userActions'
+import { useHistory } from 'react-router-dom';
 
 
 const MyNav = (props) => {
-  props.dispatch(fetchUser());
+  useEffect(() => {
+    props.dispatch(fetchUser());
+  }, [])
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   // const [user, setUser] = useState(0);
-  
-  useEffect(()=>{
-    if((props.user) && (props.user.logoutPending)){
+
+  useEffect(() => {
+    if (props.logoutPending) {
       history.push('/');
     }
-  },[props.user])
+  }, [props])
 
   const toggle = () => setIsOpen(!isOpen);
   const logOut = () => {
@@ -40,24 +42,24 @@ const MyNav = (props) => {
               <NavLink href="/dashboard">Dashboard</NavLink>
             </NavItem>
           </Nav>
-          {props.email ? 
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/profile/me">Welcome {props.email}</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink onClick={logOut} href="#">Logout</NavLink>
-            </NavItem>
-          </Nav>
-          :
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-            <NavLink href="/login">Login</NavLink>
-            </NavItem>
-            <NavItem>
-            <NavLink href="/register">Register</NavLink>
-            </NavItem>
-          </Nav>}
+          {props.isLoggedIn ?
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/profile/me">Welcome {props.firstName}</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={logOut} href="#">Logout</NavLink>
+              </NavItem>
+            </Nav>
+            :
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/login">Login</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/register">Register</NavLink>
+              </NavItem>
+            </Nav>}
           {/* <Nav className="ml-auto" navbar>
             <NavItem>
             {props.email ? <NavLink href="/profile/me">Welcome {props.email}</NavLink> : <NavLink href="/login">Login</NavLink>}
@@ -75,8 +77,8 @@ const MyNav = (props) => {
 }
 
 const mapStateToProps = state => {
-  const { user } = state.userState || {};
-  return user;
+  const {userState} = state || {};
+  return userState;
 }
 
 export default connect(mapStateToProps)(MyNav);

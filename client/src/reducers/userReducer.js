@@ -1,8 +1,6 @@
 export default function reducer(state={
-    user: {
-      isLoggedIn: false,
-      logoutPending: false,
-    },
+    isLoggedIn: false,
+    logoutPending: false,
     fetching: false,
     fetched: false,
     error: null,
@@ -23,25 +21,43 @@ export default function reducer(state={
           ...state,
           fetching: false,
           fetched: true,
-          user: action.payload,
+          ...action.payload,
         }
       }
-      case "LOGIN_USER_START_FULFILLED":{
+      case "LOGIN_USER_PENDING":{
+        return {
+            ...state,
+            isLoggedIn: false,
+            fetching: true,
+            fetched: false,
+            ...action.payload
+        }
+    }
+      case "LOGIN_USER_FULFILLED":{
           return {
               ...state,
               isLoggedIn: true,
               fetching: false,
               fetched: true,
-              user: action.payload.user
+              ...action.payload.user
           }
       }
+      case "LOGIN_USER_REJECTED":{
+        return {
+            ...state,
+            isLoggedIn: false,
+            fetching: false,
+            fetched: false,
+            ...action.payload.response.data
+        }
+    }
       case "REGISTER_USER_PENDING":{
         return {
             ...state,
             isLoggedIn: false,
             fetching: true,
             fetched: true,
-            user: action.payload
+            ...action.payload
         }
       }
       case "REGISTER_USER_FULFILLED":{
@@ -50,7 +66,7 @@ export default function reducer(state={
             isLoggedIn: true,
             fetching: false,
             fetched: false,
-            user: action.payload
+            ...action.payload
         }
       } 
       case "REGISTER_USER_REJECTED":{
@@ -59,23 +75,15 @@ export default function reducer(state={
             isLoggedIn: false,
             fetching: false,
             fetched: false,
-            auth: action.payload.response.data
+            ...action.payload.response.data
         }
       }
-      case "LOGIN_USER_START_REJECTED":{
-        return {
-            ...state,
-            isLoggedIn: false,
-            fetching: false,
-            fetched: false,
-            auth: action.payload.response.data
-        }
-    }
+      
       case "LOGOUT_USER":{
         return {
           ...state,
           logoutPending: true,
-          user: action.payload
+          ...action.payload
         }
       }
       case "LOGOUT_USER_PENDING":{
@@ -83,7 +91,7 @@ export default function reducer(state={
           ...state,
           logoutPending: true,
           isLoggedIn: false,
-          user: action.payload
+          ...action.payload
         }
       }
       case "LOGOUT_USER_FULFILLED":{
@@ -91,7 +99,7 @@ export default function reducer(state={
           ...state,
           logoutPending: false,
           isLoggedIn: false,
-          user: action.payload
+          ...action.payload
         }
       }
       default:

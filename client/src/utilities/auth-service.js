@@ -34,10 +34,13 @@ export default {
         return new Promise(function(resolve, reject){
             let user = JSON.parse(localStorage.getItem("user"));
             if(user){
-                user.logoutPending = false;
-                return resolve(user)
+                let data = {...user};
+                data.logoutPending = false;
+                data.isLoggedIn = true;
+                // user.logoutPending = false;
+                return resolve(data)
             }else{
-                resolve('no user');
+               reject(null)
                 // return function(dispatch){
                 //     dispatch({type: "LOGOUT_USER_FULFILLED", payload: {user:{logoutPending: false}}});
                 // }
@@ -51,9 +54,10 @@ export default {
             let data = {
                 logoutPending: true
             }
-            resolve({user:data})
+            resolve(data)
+            data.logoutPending = false;
             return function(dispatch){
-                dispatch({type: "LOGOUT_USER_FULFILLED", payload: {user:data}});
+                dispatch({type: "LOGOUT_USER_FULFILLED", payload: data});
             }
         })
         
